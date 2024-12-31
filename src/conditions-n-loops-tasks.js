@@ -126,8 +126,55 @@ function convertToRomanNumerals(/* num */) {
  *  '10,5'    => 'one zero point five'
  *  '1950.2'  => 'one nine five zero point two'
  */
-function convertNumberToString(/* numberStr */) {
-  throw new Error('Not implemented');
+function convertNumberToString(numberStr) {
+  let result = '';
+  for (let i = 0; i < numberStr.length; i += 1) {
+    const char = numberStr[i];
+    let numToWord = '';
+    switch (char) {
+      case '0':
+        numToWord = 'zero';
+        break;
+      case '1':
+        numToWord = 'one';
+        break;
+      case '2':
+        numToWord = 'two';
+        break;
+      case '3':
+        numToWord = 'three';
+        break;
+      case '4':
+        numToWord = 'four';
+        break;
+      case '5':
+        numToWord = 'five';
+        break;
+      case '6':
+        numToWord = 'six';
+        break;
+      case '7':
+        numToWord = 'seven';
+        break;
+      case '8':
+        numToWord = 'eight';
+        break;
+      case '9':
+        numToWord = 'nine';
+        break;
+      case '-':
+        numToWord = 'minus';
+        break;
+      case '.':
+        numToWord = 'point';
+        break;
+      default:
+        numToWord = 'point';
+    }
+    if (result.length > 0) result += ' ';
+    result += numToWord;
+  }
+  return result;
 }
 
 /**
@@ -143,8 +190,11 @@ function convertNumberToString(/* numberStr */) {
  *  'qweqwe'    => false
  */
 function isPalindrome(str) {
-  const reversedStr = Array.from(str).reverse().join('');
-  return reversedStr === str;
+  let result = '';
+  for (let i = str.length - 1; i >= 0; i -= 1) {
+    result += str[i];
+  }
+  return result === str;
 }
 
 /**
@@ -161,8 +211,15 @@ function isPalindrome(str) {
  *  'qwerty', 'Q'     => -1
  *  'qwerty', 'p'     => -1
  */
-function getIndexOf(/* str, letter */) {
-  throw new Error('Not implemented');
+function getIndexOf(str, letter) {
+  let result = -1;
+  for (let i = 0; i < str.length; i += 1) {
+    if (letter === str[i]) {
+      result = i;
+      break;
+    }
+  }
+  return result;
 }
 
 /**
@@ -180,8 +237,17 @@ function getIndexOf(/* str, letter */) {
  *  12345, 0    => false
  *  12345, 6    => false
  */
-function isContainNumber(/* num, digit */) {
-  throw new Error('Not implemented');
+function isContainNumber(num, digit) {
+  let result = 0;
+  const numToStr = `${num}`;
+  const digitStr = `${digit}`;
+  for (let i = 0; i < numToStr.length; i += 1) {
+    if (digitStr === numToStr[i]) {
+      result = 1;
+      break;
+    }
+  }
+  return result === 1;
 }
 
 /**
@@ -197,8 +263,23 @@ function isContainNumber(/* num, digit */) {
  *  [2, 3, 9, 5] => 2       => 2 + 3 === 5 then balance element is 9 and its index = 2
  *  [1, 2, 3, 4, 5] => -1   => no balance element
  */
-function getBalanceIndex(/* arr */) {
-  throw new Error('Not implemented');
+function getBalanceIndex(arr) {
+  for (let i = 0; i < arr.length; i += 1) {
+    let leftSum = 0;
+    let rightSum = 0;
+
+    for (let leftIndex = 0; leftIndex < i; leftIndex += 1) {
+      leftSum += arr[leftIndex];
+    }
+
+    for (let rightIndex = arr.length - 1; rightIndex > i; rightIndex -= 1) {
+      rightSum += arr[rightIndex];
+    }
+    if (leftSum === rightSum) {
+      return i;
+    }
+  }
+  return -1;
 }
 
 /**
